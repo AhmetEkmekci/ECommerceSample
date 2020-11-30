@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ECommerceSample": {
+      "commandName": "Project",
+      "commandLineArgs": "Scenarios/Scenario2 (4).txt"
+    }
+  }
+}

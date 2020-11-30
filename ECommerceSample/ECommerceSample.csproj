@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ECommerceSample.Core\ECommerceSample.Core.csproj" />
+    <ProjectReference Include="..\ECommerceSample.Data\ECommerceSample.Data.csproj" />
+    <ProjectReference Include="..\ECommerceSample.Domain\ECommerceSample.Domain.csproj" />
+    <ProjectReference Include="..\ECommerceSample.Service\ECommerceSample.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Scenarios\Scenario1 %284%29.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\Scenario2 %284%29.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\Scenario3 %283%29.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\Scenario4 %283%29.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scenarios\Scenario5 %283%29.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
