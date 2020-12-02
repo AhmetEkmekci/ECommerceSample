@@ -200,14 +200,17 @@ namespace ECommerceSample.Service
         }
         bool CampaignStatus(Campaign campaign)
         {
-            return campaign.StartDate.AddHours(campaign.Duration) > SystemDate;
+            return 
+                campaign.StartDate.AddHours(campaign.Duration) > SystemDate || 
+                campaign.TargetSalesCount > orderRepository.Find(x=>x.OrderDate > campaign.StartDate).Sum(x=>x.Quantity);
         }
         int CampaignTotalSales(Campaign campaign)
         {
             var campaignTarget = campaign.TargetSalesCount;
 
             return orderRepository
-                .Find(x => x.ProductCode == campaign.ProductCode)
+                .Find(x => x.ProductCode == campaign.ProductCode && x.OrderDate >= campaign.StartDate && x.OrderDate <= campaign.StartDate.AddHours(campaign.Duration))
+                .OrderBy(x=>x.OrderDate)
                 .Where(x=> campaignTarget > 0 && (campaignTarget -= x.Quantity) >= 0)
                 .Sum(x => x.Quantity);
         }
@@ -217,7 +220,8 @@ namespace ECommerceSample.Service
             var campaignTarget = campaign.TargetSalesCount;
             
             return orderRepository
-                .Find(x => x.ProductCode == campaign.ProductCode)
+                .Find(x => x.ProductCode == campaign.ProductCode && x.OrderDate >= campaign.StartDate && x.OrderDate <= campaign.StartDate.AddHours(campaign.Duration))
+                .OrderBy(x => x.OrderDate)
                 .Where(x=> campaignTarget > 0 && (campaignTarget -= x.Quantity) >= 0)
                 .Sum(x => (productPrice - productPrice * (decimal)ProductCurrentDiscountPercentage(x.ProductCode, x.OrderDate) / 100) * x.Quantity);
         }
